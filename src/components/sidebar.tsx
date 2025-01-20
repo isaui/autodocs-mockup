@@ -1,7 +1,22 @@
-"use client"
+"use client";
 
-import React, { useState } from 'react';
-import { Building, Users, Briefcase, Star, ChevronDown, Library, Settings, LogOut, Receipt, Scale, FolderOpen, Folder, Plus } from 'lucide-react';
+import React, { useState } from "react";
+import {
+  Building,
+  Users,
+  Briefcase,
+  Star,
+  ChevronDown,
+  Library,
+  Settings,
+  LogOut,
+  Receipt,
+  Scale,
+  FolderOpen,
+  Folder,
+  Plus,
+  Zap,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -18,60 +33,71 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion"
+} from "@/components/ui/accordion";
 
 // Constant for consistent icon sizing
 const ICON_CLASS = "h-4 w-4 shrink-0";
 
 const Sidebar = () => {
-  const [activeWorkspace, setActiveWorkspace] = useState('hr');
-  const [activeDocument, setActiveDocument] = useState('contracts');
-  const [activeSection, setActiveSection] = useState('documents');
+  const [activeWorkspace, setActiveWorkspace] = useState("hr");
+  const [activeDocument, setActiveDocument] = useState("contracts");
+  const [activeSection, setActiveSection] = useState("documents");
 
   const workspaces = [
     {
-      id: 'hr',
-      name: 'HR Department',
+      id: "hr",
+      name: "HR Department",
       icon: <Briefcase className={ICON_CLASS} />,
       documents: [
-        { id: 'contracts', name: 'Employee Contracts' },
-        { id: 'reviews', name: 'Performance Reviews' },
-        { id: 'onboarding', name: 'Onboarding Docs' },
-        { id: 'leave', name: 'Leave Management' }
+        { id: "contracts", name: "Employee Contracts" },
+        { id: "onboarding", name: "Onboarding Docs" },
+        { id: "leave", name: "Leave Management" },
       ],
       templates: [
-        { id: 'contract-templates', name: 'Contract Templates' },
-        { id: 'letter-templates', name: 'Letter Templates' },
-        { id: 'form-templates', name: 'Form Templates' }
-      ]
+        { id: "contract-templates", name: "Contract Templates" },
+        { id: "letter-templates", name: "Letter Templates" },
+        { id: "form-templates", name: "Form Templates" },
+      ],
+      automations: [
+        { id: "onboarding-automation", name: "Onboarding Workflow" },
+        { id: "leave-approval", name: "Leave Approval Automation" },
+      ],
     },
     {
-      id: 'finance',
-      name: 'Finance',
+      id: "finance",
+      name: "Finance",
       icon: <Receipt className={ICON_CLASS} />,
       documents: [
-        { id: 'invoices', name: 'Invoices' },
-        { id: 'expenses', name: 'Expenses' },
-        { id: 'reports', name: 'Reports' }
+        { id: "invoices", name: "Invoices" },
+        { id: "expenses", name: "Expenses" },
+        { id: "reports", name: "Reports" },
       ],
       templates: [
-        { id: 'invoice-templates', name: 'Invoice Templates' },
-        { id: 'report-templates', name: 'Report Templates' }
-      ]
+        { id: "invoice-templates", name: "Invoice Templates" },
+        { id: "report-templates", name: "Report Templates" },
+      ],
+      automations: [
+        { id: "expense-approval", name: "Expense Approval Workflow" },
+        { id: "invoice-reminder", name: "Invoice Reminder Automation" },
+      ],
     },
     {
-      id: 'legal',
-      name: 'Legal',
+      id: "legal",
+      name: "Legal",
       icon: <Scale className={ICON_CLASS} />,
       documents: [
-        { id: 'contracts', name: 'Contracts' },
-        { id: 'compliance', name: 'Compliance' }
+        { id: "contracts", name: "Contracts" },
+        { id: "compliance", name: "Compliance" },
       ],
       templates: [
-        { id: 'agreement-templates', name: 'Agreement Templates' },
-        { id: 'policy-templates', name: 'Policy Templates' }
-      ]
-    }
+        { id: "agreement-templates", name: "Agreement Templates" },
+        { id: "policy-templates", name: "Policy Templates" },
+      ],
+      automations: [
+        { id: "contract-renewal", name: "Contract Renewal Workflow" },
+        { id: "compliance-check", name: "Compliance Check Automation" },
+      ],
+    },
   ];
 
   return (
@@ -105,7 +131,9 @@ const Sidebar = () => {
       <div className="flex-1 overflow-auto">
         {/* Quick Access */}
         <div className="p-4">
-          <div className="text-sm font-medium text-gray-500 mb-2">QUICK ACCESS</div>
+          <div className="text-sm font-medium text-gray-500 mb-2">
+            QUICK ACCESS
+          </div>
           <div className="space-y-1">
             <Button variant="ghost" className="w-full justify-start">
               <Star className={ICON_CLASS + " mr-2"} />
@@ -119,6 +147,10 @@ const Sidebar = () => {
               <Library className={ICON_CLASS + " mr-2"} />
               Global Templates
             </Button>
+            <Button variant="ghost" className="w-full justify-start">
+              <Zap className={ICON_CLASS + " mr-2"} />
+              Global Automations
+            </Button>
           </div>
         </div>
 
@@ -127,12 +159,14 @@ const Sidebar = () => {
         {/* Workspaces */}
         <div className="p-4">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-sm font-medium text-gray-500">WORKSPACES</span>
+            <span className="text-sm font-medium text-gray-500">
+              WORKSPACES
+            </span>
             <Button variant="ghost" size="icon" className="h-4 w-4">
               <Plus className={ICON_CLASS} />
             </Button>
           </div>
-          
+
           <Accordion type="single" collapsible defaultValue="hr">
             {workspaces.map((workspace) => (
               <AccordionItem value={workspace.id} key={workspace.id}>
@@ -146,21 +180,31 @@ const Sidebar = () => {
                   <div className="pl-6 space-y-4">
                     {/* Documents Section */}
                     <div>
-                      <div className="text-xs font-medium text-gray-500 mb-1">DOCUMENTS</div>
+                      <div className="text-xs font-medium text-gray-500 mb-1">
+                        DOCUMENTS
+                      </div>
                       <div className="space-y-1">
                         {workspace.documents.map((doc) => (
                           <Button
                             key={doc.id}
-                            variant={activeWorkspace === workspace.id && activeDocument === doc.id && activeSection === 'documents' ? "secondary" : "ghost"}
+                            variant={
+                              activeWorkspace === workspace.id &&
+                              activeDocument === doc.id &&
+                              activeSection === "documents"
+                                ? "secondary"
+                                : "ghost"
+                            }
                             className={`w-full justify-start ${
-                              activeWorkspace === workspace.id && activeDocument === doc.id && activeSection === 'documents'
-                                ? "bg-blue-100 hover:bg-blue-100" 
+                              activeWorkspace === workspace.id &&
+                              activeDocument === doc.id &&
+                              activeSection === "documents"
+                                ? "bg-blue-100 hover:bg-blue-100"
                                 : ""
                             }`}
                             onClick={() => {
                               setActiveWorkspace(workspace.id);
                               setActiveDocument(doc.id);
-                              setActiveSection('documents');
+                              setActiveSection("documents");
                             }}
                           >
                             <Folder className={ICON_CLASS + " mr-2"} />
@@ -169,28 +213,71 @@ const Sidebar = () => {
                         ))}
                       </div>
                     </div>
-                    
+
                     {/* Templates Section */}
                     <div>
-                      <div className="text-xs font-medium text-gray-500 mb-1">TEMPLATES</div>
+                      <div className="text-xs font-medium text-gray-500 mb-1">
+                        TEMPLATES
+                      </div>
                       <div className="space-y-1">
                         {workspace.templates.map((template) => (
                           <Button
                             key={template.id}
-                            variant={activeWorkspace === workspace.id && activeDocument === template.id && activeSection === 'templates' ? "secondary" : "ghost"}
+                            variant={
+                              activeWorkspace === workspace.id &&
+                              activeDocument === template.id &&
+                              activeSection === "templates"
+                                ? "secondary"
+                                : "ghost"
+                            }
                             className={`w-full justify-start ${
-                              activeWorkspace === workspace.id && activeDocument === template.id && activeSection === 'templates'
-                                ? "bg-blue-100 hover:bg-blue-100" 
+                              activeWorkspace === workspace.id &&
+                              activeDocument === template.id &&
+                              activeSection === "templates"
+                                ? "bg-blue-100 hover:bg-blue-100"
                                 : ""
                             }`}
                             onClick={() => {
                               setActiveWorkspace(workspace.id);
                               setActiveDocument(template.id);
-                              setActiveSection('templates');
+                              setActiveSection("templates");
                             }}
                           >
                             <Library className={ICON_CLASS + " mr-2"} />
                             {template.name}
+                          </Button>
+                        ))}
+                      </div>
+                    </div>
+                    {/* Automations Section */}
+                    <div>
+                      <div className="text-xs font-medium text-gray-500 mb-1">AUTOMATIONS</div>
+                      <div className="space-y-1">
+                        {workspace.automations.map((automation) => (
+                          <Button
+                            key={automation.id}
+                            variant={
+                              activeWorkspace === workspace.id &&
+                              activeDocument === automation.id &&
+                              activeSection === "automations"
+                                ? "secondary"
+                                : "ghost"
+                            }
+                            className={`w-full justify-start ${
+                              activeWorkspace === workspace.id &&
+                              activeDocument === automation.id &&
+                              activeSection === "automations"
+                                ? "bg-blue-100 hover:bg-blue-100"
+                                : ""
+                            }`}
+                            onClick={() => {
+                              setActiveWorkspace(workspace.id);
+                              setActiveDocument(automation.id);
+                              setActiveSection("automations");
+                            }}
+                          >
+                            <Zap className={ICON_CLASS + " mr-2"} />
+                            {automation.name}
                           </Button>
                         ))}
                       </div>

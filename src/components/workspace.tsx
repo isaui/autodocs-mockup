@@ -251,6 +251,8 @@ const Workspace = () => {
               <ChevronRight className={ICON_CLASS} />
               <span>HR Department</span>
               <ChevronRight className={ICON_CLASS} />
+              <span>Documents</span>
+              <ChevronRight className={ICON_CLASS} />
               <span className="font-medium text-gray-900">Employee Contracts</span>
             </div>
   
