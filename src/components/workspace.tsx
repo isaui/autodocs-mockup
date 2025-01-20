@@ -363,11 +363,11 @@ const Workspace = () => {
                         onCheckedChange={(checked:any) => handleSelectItem(batch.id, checked as boolean)}
                       />
                     </div>
-                    <div className="col-span-3 flex items-center gap-2">
+                    <a href='/doc/batch/detail' className="col-span-3 flex items-center gap-2">
                       <Folder className={ICON_CLASS} />
                       <span>{batch.name}</span>
                       <span className="text-sm text-gray-500">({batch.count} documents)</span>
-                    </div>
+                    </a>
                     <div className="col-span-1">{batch.type}</div>
                     <div className="col-span-2 flex gap-1 flex-wrap">
                       {batch.tags.map((tag) => (
@@ -407,10 +407,10 @@ const Workspace = () => {
                         onCheckedChange={(checked:any) => handleSelectItem(doc.id, checked as boolean)}
                       />
                     </div>
-                    <div className="col-span-3 flex items-center gap-2">
+                    <a href='/doc/detail' className="col-span-3 flex items-center gap-2">
                       <FileText className={ICON_CLASS} />
                       <span>{doc.name}</span>
-                    </div>
+                    </a>
                     <div className="col-span-1">{doc.type}</div>
                     <div className="col-span-2 flex gap-1 flex-wrap">
                       {doc.tags.map((tag) => (
